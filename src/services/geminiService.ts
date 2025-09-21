@@ -2,7 +2,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { CourseParams, LearningStyle, AssessmentQuestion, Course, SessionDetails, ActiveSessionContext } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY! });
+const ai = new GoogleGenAI({ apiKey: (import.meta as any).env.VITE_GEMINI_API_KEY! });
 const model = "gemini-2.5-flash";
 
 // Helper function to parse JSON from AI response, handling markdown code blocks

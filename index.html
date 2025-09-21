@@ -1,46 +1,261 @@
-<!DOCTYPE html>
-<html lang="en" class="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Course Generator</title>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Course Generator - Personalized Learning Experience</title>
+    <meta name="description" content="Create personalized courses with AI-powered learning style assessment and interactive content." />
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom animation for a smooth entrance */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            animation: {
+              'fade-in-up': 'fadeInUp 0.6s ease-out',
+              'fade-in': 'fadeIn 0.4s ease-out',
+              'slide-in-right': 'slideInRight 0.5s ease-out',
+              'slide-in-left': 'slideInLeft 0.5s ease-out',
+              'bounce-in': 'bounceIn 0.6s ease-out',
+              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'gradient-x': 'gradient-x 15s ease infinite',
+              'float': 'float 6s ease-in-out infinite',
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': {
+                  opacity: '0',
+                  transform: 'translateY(30px)'
+                },
+                '100%': {
+                  opacity: '1',
+                  transform: 'translateY(0)'
+                }
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' }
+              },
+              slideInRight: {
+                '0%': {
+                  opacity: '0',
+                  transform: 'translateX(30px)'
+                },
+                '100%': {
+                  opacity: '1',
+                  transform: 'translateX(0)'
+                }
+              },
+              slideInLeft: {
+                '0%': {
+                  opacity: '0',
+                  transform: 'translateX(-30px)'
+                },
+                '100%': {
+                  opacity: '1',
+                  transform: 'translateX(0)'
+                }
+              },
+              bounceIn: {
+                '0%': {
+                  opacity: '0',
+                  transform: 'scale(0.3)'
+                },
+                '50%': {
+                  opacity: '1',
+                  transform: 'scale(1.05)'
+                },
+                '70%': {
+                  transform: 'scale(0.9)'
+                },
+                '100%': {
+                  opacity: '1',
+                  transform: 'scale(1)'
+                }
+              },
+              'gradient-x': {
+                '0%, 100%': {
+                  'background-size': '200% 200%',
+                  'background-position': 'left center'
+                },
+                '50%': {
+                  'background-size': '200% 200%',
+                  'background-position': 'right center'
+                }
+              },
+              float: {
+                '0%, 100%': {
+                  transform: 'translateY(0px)'
+                },
+                '50%': {
+                  transform: 'translateY(-10px)'
+                }
+              }
+            },
+            backgroundImage: {
+              'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+              'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+            },
+            colors: {
+              'gradient-primary': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+          }
         }
-        .animate-fade-in-up {
-            animation: fadeInUp 0.5s ease-out forwards;
-        }
-
-        /* Ensure SVG foreignObject content inherits dark mode text color */
-        .dark foreignObject p {
-            color: #e2e8f0; /* slate-200 */
-        }
-    </style>
-    <script type="importmap">
-    {
-      "imports": {
-        "react": "https://aistudiocdn.com/react@^19.1.1",
-        "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
-        "react/": "https://aistudiocdn.com/react@^19.1.1/",
-        "@google/genai": "https://aistudiocdn.com/@google/genai@^1.20.0",
-        "react-markdown": "https://aistudiocdn.com/react-markdown@^10.1.0"
       }
-    }
     </script>
-</head>
-<body class="bg-slate-100 dark:bg-slate-900">
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    
+    <!-- Custom Styles -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+      
+      * {
+        font-family: 'Inter', sans-serif;
+      }
+      
+      .animate-fade-in-up {
+        animation: fadeInUp 0.6s ease-out;
+      }
+      
+      .animate-fade-in {
+        animation: fadeIn 0.4s ease-out;
+      }
+      
+      .animate-slide-in-right {
+        animation: slideInRight 0.5s ease-out;
+      }
+      
+      .animate-slide-in-left {
+        animation: slideInLeft 0.5s ease-out;
+      }
+      
+      .animate-bounce-in {
+        animation: bounceIn 0.6s ease-out;
+      }
+      
+      .animate-pulse-slow {
+        animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      
+      .animate-gradient-x {
+        animation: gradient-x 15s ease infinite;
+      }
+      
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+      
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 4px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+      }
+      
+      /* Dark mode scrollbar */
+      .dark ::-webkit-scrollbar-track {
+        background: #1e293b;
+      }
+      
+      .dark ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      }
+      
+      .dark ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%);
+      }
+      
+      /* Gradient text */
+      .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      /* Glass morphism effect */
+      .glass {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      
+      .dark .glass {
+        background: rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      /* Smooth transitions */
+      * {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      /* Focus styles */
+      .focus-ring {
+        @apply focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800;
+      }
+      
+      /* Button hover effects */
+      .btn-hover {
+        @apply transform hover:scale-105 hover:shadow-lg transition-all duration-300;
+      }
+      
+      /* Card hover effects */
+      .card-hover {
+        @apply transform hover:scale-102 hover:shadow-xl transition-all duration-300;
+      }
+      
+      /* Loading animation */
+      .loading-dots::after {
+        content: '';
+        animation: loading-dots 1.5s infinite;
+      }
+      
+      @keyframes loading-dots {
+        0%, 20% { content: ''; }
+        40% { content: '.'; }
+        60% { content: '..'; }
+        80%, 100% { content: '...'; }
+      }
+      
+      /* Gradient borders */
+      .gradient-border {
+        position: relative;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 2px;
+        border-radius: 12px;
+      }
+      
+      .gradient-border::before {
+        content: '';
+        position: absolute;
+        inset: 2px;
+        background: white;
+        border-radius: 10px;
+        z-index: -1;
+      }
+      
+      .dark .gradient-border::before {
+        background: #1e293b;
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 min-h-screen">
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-</body>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
 </html>
