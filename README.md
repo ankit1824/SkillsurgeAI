@@ -1,8 +1,6 @@
 # 🎓 AI Course Generator
 
-<div align="center">
-  <img width="1200" height="475" alt="AI Course Generator Banner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+
 
 An intelligent course generation platform that creates personalized learning experiences by analyzing user preferences, learning styles, and educational goals through AI-powered assessments and content generation.
 
