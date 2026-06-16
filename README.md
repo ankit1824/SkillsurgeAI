@@ -88,5 +88,4 @@ SkillsurgeAI/
 
 <div align="center">
   <p>Built with ❤️ for personalized learning experiences</p>
-  <p>View in AI Studio: <a href="https://ai.studio/apps/drive/1WmVmpC43r9n9QX1TwvHDLBc4TWmftk7T">AI Studio App</a></p>
 </div>
